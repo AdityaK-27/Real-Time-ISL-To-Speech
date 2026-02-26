@@ -34,8 +34,7 @@ This project implements an end-to-end pipeline for detecting and recognizing Ind
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd Real-Time-ISL-Translation
+git clone https://github.com/AdityaK-27/Real-Time-ISL-To-Speech
 ```
 
 2. Create a virtual environment (optional but recommended):

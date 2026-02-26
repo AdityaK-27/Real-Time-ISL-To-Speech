@@ -216,17 +216,9 @@ Key parameters can be modified in the scripts:
 - Improved pose estimation accuracy
 - Support for continuous sentence recognition
 
-## License
-
-[Add your license information here]
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
-
-## Contact
-
-For questions or suggestions, please contact the project maintainers.
 
 ---
 

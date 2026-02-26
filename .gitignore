@@ -1,0 +1,12 @@
+# Ignore raw videos
+greetings_data/
+
+# Optional: ignore all MOV files
+*.MOV
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Results
+results/

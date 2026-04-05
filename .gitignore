@@ -1,12 +1,22 @@
 # Ignore raw videos
 greetings_data/
-
-# Optional: ignore all MOV files
+greetings_data_large/
+*.mp4
 *.MOV
+*.avi
+
+# Ignore generic text files but allow important ones
+*.txt
+!IEEE_Paper_Blueprint.txt
+!Model_Training_Cheat_Sheet.txt
 
 # Python cache
 __pycache__/
 *.pyc
 
-# Results
-results/
+# Virtual Environment
+venv/
+.env/
+
+# Explicitly tracking Results directory for GitHub
+!results/

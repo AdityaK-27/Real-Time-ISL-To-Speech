@@ -1,0 +1,10 @@
+{
+  "experiment": "large_kalman",
+  "test_accuracy": 0.9285714285714286,
+  "macro_f1": 0.9228395061728395,
+  "mean_auc": 0.9958748221906117,
+  "inference_time_ms": 43.55571905616671,
+  "inference_time_std_ms": 6.359968604407864,
+  "best_epoch": 69,
+  "num_test_samples": 42
+}

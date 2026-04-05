@@ -14,7 +14,7 @@ This project implements an end-to-end pipeline for detecting and recognizing Ind
   - BiLSTM with Attention mechanism
   - Transformer-based models
 - **MediaPipe Integration**: Efficient pose and hand keypoint extraction
-- **Data Augmentation**: Gaussian noise addition for robust model training
+- **Data Augmentation**: Temporal and structural augmentations for robust model training
 - **Text-to-Speech**: Convert detected gestures to speech
 - **High Accuracy**: Trained on multiple sign language categories
 
@@ -165,7 +165,7 @@ The project includes multiple LSTM-based architectures:
 
 - **Loss Function**: Categorical Crossentropy
 - **Optimizer**: Adam
-- **Data Augmentation**: Gaussian noise (μ=0, σ=0.01)
+- **Data Augmentation**: Time warping, mirror flip, frame dropout, speed variation
 - **Regularization**: Dropout layers to prevent overfitting
 - **Validation Monitoring**: Early stopping based on validation loss
 - **Frame Skipping**: Skip frames during video processing (default: every 2nd frame)

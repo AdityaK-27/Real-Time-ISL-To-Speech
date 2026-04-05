@@ -1,5 +1,0 @@
-Model Name: lstm_v3
-Model Path: models\lstm_v3\isl_model.h5
-Test Samples: 38
-Loss: 0.3504
-Accuracy: 84.21%

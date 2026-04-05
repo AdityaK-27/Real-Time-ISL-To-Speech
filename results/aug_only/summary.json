@@ -1,0 +1,10 @@
+{
+  "experiment": "aug_only",
+  "test_accuracy": 0.7931034482758621,
+  "macro_f1": 0.7883597883597884,
+  "mean_auc": 0.9874928774928775,
+  "inference_time_ms": 57.00669299811125,
+  "inference_time_std_ms": 16.5012677737406,
+  "best_epoch": 86,
+  "num_test_samples": 29
+}

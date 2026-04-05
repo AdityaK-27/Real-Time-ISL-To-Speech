@@ -1,0 +1,10 @@
+{
+  "experiment": "lstm_large_raw",
+  "test_accuracy": 0.7142857142857143,
+  "macro_f1": 0.681405014738348,
+  "mean_auc": 0.9515647226173543,
+  "inference_time_ms": 153.56967699248344,
+  "inference_time_std_ms": 37.663729404871646,
+  "best_epoch": 54,
+  "num_test_samples": 42
+}

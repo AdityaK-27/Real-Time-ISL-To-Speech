@@ -1,0 +1,10 @@
+{
+  "experiment": "full_pipeline",
+  "test_accuracy": 0.7931034482758621,
+  "macro_f1": 0.7912698412698412,
+  "mean_auc": 0.9817948717948719,
+  "inference_time_ms": 135.10341001674533,
+  "inference_time_std_ms": 51.42420662056131,
+  "best_epoch": 82,
+  "num_test_samples": 29
+}

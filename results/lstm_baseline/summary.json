@@ -1,0 +1,10 @@
+{
+  "experiment": "lstm_baseline",
+  "test_accuracy": 0.5862068965517241,
+  "macro_f1": 0.548941798941799,
+  "mean_auc": 0.9067236467236468,
+  "inference_time_ms": 123.09388102963567,
+  "inference_time_std_ms": 33.73369178358274,
+  "best_epoch": 50,
+  "num_test_samples": 29
+}

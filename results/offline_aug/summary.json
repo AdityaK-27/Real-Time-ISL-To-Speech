@@ -1,0 +1,10 @@
+{
+  "experiment": "offline_aug",
+  "test_accuracy": 0.8620689655172413,
+  "macro_f1": 0.8460317460317461,
+  "mean_auc": 0.9920797720797722,
+  "inference_time_ms": 51.73743499908596,
+  "inference_time_std_ms": 4.052998346962044,
+  "best_epoch": 41,
+  "num_test_samples": 29
+}

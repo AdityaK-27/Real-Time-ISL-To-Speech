@@ -112,6 +112,25 @@ def plot_confusion_matrix(y_true, y_pred, class_names, save_dir, experiment_name
     print(f"  ✓ Confusion matrix saved")
 
 
+def plot_normalized_confusion_matrix(y_true, y_pred, class_names, save_dir, experiment_name):
+    """Plot normalized confusion matrix."""
+    cm = confusion_matrix(y_true, y_pred, normalize='true')
+
+    plt.figure(figsize=(10, 8))
+    # Plot percentage formatting
+    sns.heatmap(cm, annot=True, fmt='.2f', cmap='Blues',
+                xticklabels=class_names, yticklabels=class_names)
+    plt.title(f'Normalized Confusion Matrix\n({experiment_name})', fontsize=14)
+    plt.xlabel('Predicted', fontsize=12)
+    plt.ylabel('Actual', fontsize=12)
+    plt.xticks(rotation=45, ha='right')
+    plt.yticks(rotation=0)
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_dir, 'confusion_matrix_normalized.png'), dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"  ✓ Normalized confusion matrix saved")
+
+
 def plot_roc_curves(y_true, y_probs, class_names, save_dir, experiment_name):
     """Plot one-vs-rest ROC curves + mean AUC."""
     # Binarize labels
@@ -207,6 +226,7 @@ def evaluate_experiment(experiment_name):
 
     # 2. Confusion matrix
     plot_confusion_matrix(y_true, y_pred, class_names, save_dir, experiment_name)
+    plot_normalized_confusion_matrix(y_true, y_pred, class_names, save_dir, experiment_name)
 
     # 3. Classification report
     report = classification_report(y_true, y_pred, target_names=class_names,

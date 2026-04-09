@@ -116,7 +116,7 @@ def predict_gesture(model, sequence, device):
 
 def main():
     parser = argparse.ArgumentParser(description="Real-Time ISL Gesture Detection")
-    parser.add_argument('--model', default='full_pipeline',
+    parser.add_argument('--model', default='large_raw',
                         help='Experiment name to load model from')
     args = parser.parse_args()
 
@@ -138,6 +138,9 @@ def main():
     res = None
     detecting = False
     camera_active = True
+    
+    # Threshold parameters
+    movement_threshold = 0.0003  # Variance threshold for 'stillness' check
 
     mp_holistic = mp.solutions.holistic
 
@@ -156,6 +159,10 @@ def main():
     print("  'r' — Read aloud detected gestures")
     print("  'q' — Quit")
     print("=" * 50 + "\n")
+
+    # Create a resizable named window with a much larger initial size
+    cv2.namedWindow('ISL Gesture Detection (ST-GCN)', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('ISL Gesture Detection (ST-GCN)', 1280, 960)
 
     with mp_holistic.Holistic(
         min_detection_confidence=0.4,
@@ -212,18 +219,25 @@ def main():
                 # Run prediction when we have enough frames
                 if len(sequence) == SEQUENCE_LENGTH:
                     seq_array = np.array(sequence)
-                    probs, pred_idx, confidence = predict_gesture(
-                        model, seq_array, device
-                    )
-                    res = probs
-
-                    pred_display = display_names[pred_idx]
-
-                    if confidence > CONFIDENCE_THRESHOLD:
-                        if not detected_gestures or pred_display != detected_gestures[-1]:
-                            detected_gestures.append(pred_display)
-                            last_detected = pred_display
-                            print(f"  Detected: {pred_display} ({confidence:.2f})")
+                    
+                    # Movement Check: Calculate variance of hand keypoints
+                    hand_variance = np.var(seq_array[:, 75:], axis=0).mean()
+                    
+                    if hand_variance < movement_threshold:
+                        last_detected = "No gesture detected"
+                        res = np.zeros(NUM_CLASSES)
+                    else:
+                        probs, pred_idx, confidence = predict_gesture(
+                            model, seq_array, device
+                        )
+                        res = probs
+                        pred_display = display_names[pred_idx]
+    
+                        if confidence > CONFIDENCE_THRESHOLD:
+                            if not detected_gestures or pred_display != detected_gestures[-1]:
+                                detected_gestures.append(pred_display)
+                                last_detected = pred_display
+                                print(f"  Detected: {pred_display} ({confidence:.2f})")
 
                 # Draw probability visualization
                 image = prob_viz(res, display_names, image)
@@ -231,10 +245,15 @@ def main():
                 # Draw detection bar
                 cv2.rectangle(image, (0, 0), (width, 60), (0, 0, 0), -1)
 
-                if res is not None and last_detected:
+                if last_detected:
+                    display_text = last_detected
+                    # Append probability if it was a real prediction (not cooldown or no gesture)
+                    if res is not None and np.max(res) > 0:
+                        display_text = f"{last_detected} ({res[np.argmax(res)]:.2f})"
+                        
                     cv2.putText(
                         image,
-                        f"{last_detected} ({res[np.argmax(res)]:.2f})",
+                        display_text,
                         (3, 40),
                         cv2.FONT_HERSHEY_SIMPLEX, 1,
                         (255, 255, 255), 2, cv2.LINE_AA
